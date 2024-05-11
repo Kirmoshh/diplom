@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SalonMebeliModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="Namee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passwordd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__276EDEB3" FromRole="Customers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__276EDEB3" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Orders__ProductI__286302EC" FromRole="Orders" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="ProductManufacturer">
+    <Key>
+      <PropertyRef Name="ProductManufacturerID" />
+    </Key>
+    <Property Name="ProductManufacturerID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductManufacturerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductMa__Produ__2B3F6F97" FromRole="ProductManufacturer" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="Namee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descriptionn" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProductMaxDiscountAmount" Type="Byte" />
+    <Property Name="ProductDiscountAmount" Type="Byte" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ProductI__286302EC" FromRole="Products" ToRole="Orders" />
+    <NavigationProperty Name="ProductManufacturers" Relationship="Self.FK__ProductMa__Produ__2B3F6F97" FromRole="Products" ToRole="ProductManufacturer" />
+    <NavigationProperty Name="ProductSuppliers" Relationship="Self.FK__ProductSu__Produ__2E1BDC42" FromRole="Products" ToRole="ProductSupplier" />
+  </EntityType>
+  <EntityType Name="ProductSupplier">
+    <Key>
+      <PropertyRef Name="ProductSupplierID" />
+    </Key>
+    <Property Name="ProductSupplierID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductSupplierName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductSu__Produ__2E1BDC42" FromRole="ProductSupplier" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK__Orders__Customer__276EDEB3">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__ProductI__286302EC">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductMa__Produ__2B3F6F97">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ProductManufacturer" Type="Self.ProductManufacturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductManufacturer">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductSu__Produ__2E1BDC42">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ProductSupplier" Type="Self.ProductSupplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductSupplier">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SalonMebeliEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="ProductManufacturers" EntityType="Self.ProductManufacturer" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductSuppliers" EntityType="Self.ProductSupplier" />
+    <AssociationSet Name="FK__Orders__Customer__276EDEB3" Association="Self.FK__Orders__Customer__276EDEB3">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__ProductI__286302EC" Association="Self.FK__Orders__ProductI__286302EC">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductMa__Produ__2B3F6F97" Association="Self.FK__ProductMa__Produ__2B3F6F97">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductManufacturer" EntitySet="ProductManufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductSu__Produ__2E1BDC42" Association="Self.FK__ProductSu__Produ__2E1BDC42">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductSupplier" EntitySet="ProductSuppliers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

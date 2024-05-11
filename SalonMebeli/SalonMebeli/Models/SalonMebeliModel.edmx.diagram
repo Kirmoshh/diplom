@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e06d7757743b4f2f8ddca064c53d5d42" Name="Diagram1">
+        <EntityTypeShape EntityType="SalonMebeliModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonMebeliModel.Order" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonMebeliModel.ProductManufacturer" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonMebeliModel.Product" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalonMebeliModel.ProductSupplier" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="SalonMebeliModel.FK__Orders__Customer__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonMebeliModel.FK__Orders__ProductI__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonMebeliModel.FK__ProductMa__Produ__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="SalonMebeliModel.FK__ProductSu__Produ__2E1BDC42" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

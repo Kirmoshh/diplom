@@ -1,0 +1,39 @@
+﻿<Window x:Class="SalonMebeli.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalonMebeli"
+         mc:Ignorable="d"
+        Title="{Binding ElementName=MainFrame, Path=Content.Title}" 
+        Style="{StaticResource base_window}"
+        Height="450" Width="800"  
+        Closing="Window_Closing"
+        Closed="Window_Closed" WindowStartupLocation="CenterScreen" Icon="/SalonMebeli;component/Resource/iconkurs.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource additional}"/>
+        <Image Source="/SalonMebeli;component/Resource/iconkurs.png" 
+               Margin="10" 
+               HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="0" Text="Салон мебели" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Background="{StaticResource additional}"
+                   FontSize="20"
+                   FontWeight="Bold"/>
+        <Frame x:Name="MainFrame" Grid.Row="1" BorderBrush="{StaticResource akcent}"
+               NavigationUIVisibility="Hidden"
+               BorderThickness="1" ContentRendered="MainFrame_ContentRendered"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button x:Name="BtnEditGoods"  Content="Товары"  Click="BtnEditGoods_Click"/>
+
+            <Button x:Name="BtnBack"  Content="Назад"   Click="BtnBack_Click"/>
+        </StackPanel>
+        <Grid Grid.Row="2" Background="{StaticResource additional}"/>
+    </Grid>
+</Window>
